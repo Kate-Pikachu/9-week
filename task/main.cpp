@@ -23,18 +23,28 @@
 
 int main(int argc, char** argv)
 {
+	setlocale(LC_ALL, "Russian");
 	using allocator = boost::interprocess::allocator < char,
 		boost::interprocess::managed_shared_memory::segment_manager >;
 
 	using string = boost::interprocess::basic_string < char,
 		std::char_traits < char >, allocator>;
 
-	const std::string shared_memory_name = "mem";
+	const std::string shared_memory_name = "memory";
 
 	boost::interprocess::shared_memory_object::remove(shared_memory_name.c_str());
 
 	boost::interprocess::managed_shared_memory shared_memory(
 		boost::interprocess::open_or_create, shared_memory_name.c_str(), 1024);
+
+	typedef int key; // создали ключ
+	typedef std::string message; // и создали значение для обеспечения межпроцессорного отображения
+
+
+
+
+
+
 
 
 
